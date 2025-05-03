@@ -160,11 +160,6 @@ Feel free to fork this project and contribute! If you have any improvements or b
 
 ---
 
-### Contact 📬
-For any questions or feedback, you can reach me at [your-email@example.com].
-
----
-
 ### Credits 🎉
 - This project was created by **Jayamadu Gammune**. All rights reserved.
 - Special thanks to the authors of the SSD1306 OLED display libraries and documentation.
