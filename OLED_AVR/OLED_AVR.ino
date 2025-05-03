@@ -1,6 +1,16 @@
+/*
+ * OLED Display Driver for AVR Microcontrollers
+ * Author: Jayamadu Gammune
+ * Description: This code provides functions to interface with an SSD1306 OLED display using I2C communication.
+ * License: Fair Use License. This code is provided for educational and personal use. Users are free to modify, distribute, and use the code, provided it is not used for commercial purposes or in violation of any copyright laws. This code is provided "as is," without warranty of any kind. The author is not responsible for any damages, issues, or consequences arising from the use or misuse of this code.
+ * Date: May 3, 2025
+ */
+
 // Define clock frequency and OLED I2C address
 #define F_CPU 16000000UL
 #define OLED_ADDRESS 0x3C
+#define SCL_PIN    PC5   // Pin for SCL (Clock)
+#define SDA_PIN    PC4   // Pin for SDA (Data)
 
 // Display dimensions
 #define DISPLAY_WIDTH 128
@@ -81,9 +91,11 @@ const uint8_t font5x7[][5] = {
 
 
 void i2c_init(void) {
+    // Set SCL and SDA as output pins (only if you are manually controlling the pins)
+    DDRC |= (1 << SCL_PIN) | (1 << SDA_PIN);  
     TWSR = 0x00;  // Set prescaler to 1
     TWBR = 0x0C;  // Set SCL frequency to 400kHz
-    TWCR = (1 << TWEN);  // Enable TWI
+    TWCR = (1 << TWEN);  // Enable TWI (I2C)
 }
 
 void i2c_start(void) {
@@ -195,26 +207,19 @@ void oled_write_string(const char* str) {
     }
 }
 
-void display_number(int number) {
-    char buffer[4];
-    snprintf(buffer, sizeof(buffer), "%d", number);
-    
-    oled_clear();
-    oled_set_cursor(0, 0); // Position the cursor at the top left
-    oled_write_string("Exercise Count");
-    oled_set_cursor(0, 2); // Move cursor down for the number
-    oled_write_string(buffer);
-}
+
 
 int main(void) {
     i2c_init();
     oled_init();
     
+    //Add your Program foir oled here
+    oled_clear();
+    oled_set_cursor(0, 0); // Position the cursor at the top left
+    oled_write_string("Hello World 2");
+
     while (1) {
-        for (int i = 1; i <= 10; i++) {
-            display_number(i);
-            _delay_ms(1000); // Wait for 1 second
-        }
+        // Main loop, do nothing here
     }
 
     return 0;
