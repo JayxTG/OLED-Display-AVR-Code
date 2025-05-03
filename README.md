@@ -143,6 +143,7 @@ void oled_clear(void) {
 ### Pin Configuration 📌
 - **SDA (Data)**: Pin `PC4`
 - **SCL (Clock)**: Pin `PC5`
+  ( The above are for Atmega 328P Microcontroller. Feel free to change them as needed)
 - **I2C Address**: `0x3C` (Default)
 
 ---
